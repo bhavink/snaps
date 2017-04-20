@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.snaplogic.snaps</groupId>
+    <artifactId>custom-parsers</artifactId>
+    <version>1-${sl_build}</version>
+    <packaging>jar</packaging>
+
+    <name>CustomParsers</name>
+    <url>http://www.snaplogic.com</url>
+    <repositories>
+        <repository>
+            <id>Snaplogic-ThirdPartyMaven-Repository</id>
+            <name>Snaplogic ThirdParty Repository</name>
+            <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>sl_master</id>
+            <name>Snaplogic Maven Repository</name>
+            <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sl_release</id>
+            <name>Snaplogic Maven Repository</name>
+            <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>apache snapshots</id>
+            <name>apache snapshots</name>
+            <url>https://repository.apache.org/content/groups/snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!-- Guice -->
+        <repository>
+            <id>guice-maven</id>
+            <name>guice maven</name>
+            <url>http://guice-maven.googlecode.com/svn/trunk</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <!-- Profiles -->
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>Snaplogic-Maven-Cloud-Repository</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>Snaplogic-Maven-Cloud-Dev-Repository</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>Snaplogic-ThirdPartyMaven-Repository</id>
+                    <name>Snaplogic ThirdParty Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>sl_release</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>Snaplogic-ThirdPartyMaven-Repository</id>
+                    <name>Snaplogic ThirdParty Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>sl_release</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>sl_develop_snapshot</id>
+                    <name>Snaplogic Maven Snapshot Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>master</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>sl_master</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>sl_release</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>Snaplogic-ThirdPartyMaven-Repository</id>
+                    <name>Snaplogic ThirdParty Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>sl_master</id>
+                    <name>Snaplogic Maven Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>sl_master_snapshot</id>
+                    <name>Snaplogic Maven Snapshot Repository</name>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master-snapshot/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <!-- Snap zip assembly descriptor -->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>1.0-alpha-2</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.snaplogic.tools</groupId>
+                    <artifactId>snappack-installer</artifactId>
+                    <version>4.0-SNAPSHOT</version>
+                </plugin>
+             </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+
+                </configuration>
+            </plugin>
+            <!-- Snaplogic Maven Plugins -->
+            <plugin>
+                <groupId>com.snaplogic.tools</groupId>
+                <artifactId>snappack-installer</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-schema</goal>
+                        </goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Assembly instructions for creating snap zip -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <descriptors>
+                        <descriptor>${basedir}/src/main/assembly/snap.xml</descriptor>
+                        <descriptor>${basedir}/src/main/assembly/final.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Set the final name for the jar file-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.artifactId}-${VERSION}-${sl_build}</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Read the version from the directives file -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>src/main/config/directives</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>generate files</id>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <target>
+                                <!-- This will add the build number and version in the resources file. Don't
+                                     change the formatting below. -->
+                                <echo file="${project.build.directory}/classes/build.properties">build_number=${sl_build}
+                                    snap_pack_version=${VERSION}
+                                    snap_pack_fqid=${snap}-snap-${VERSION}-${sl_build}.zip
+                                    snap_pack_url=$SNAP_HOME/${snap}/target/${snap}-build
+                                    snap_pack_name=${NAME}</echo>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <company>snaplogic</company>
+        <snap>CustomParsers</snap>
+        <!-- This is the build number for the ZIP, will be SNAPSHOT by default (
+             or whatever else is defined in Tectonic's pom.xml as the default value for
+             the sl_build property).
+            Use mvn install -Dsl_build=b1234 to change that.
+        -->
+        <package.build_no>${sl_build}</package.build_no>
+        <!-- This identifies the classes which represent the actual snaps
+            (and become accessible on the jcc after deployment).
+            Don't change the formatting, all classes must be within the same line as below.!
+        -->
+        <snap.classes>
+            com.snaplogic.snaps.hl7.HL7Parser,
+            com.snaplogic.snaps.edi.EDIParser,
+            com.snaplogic.snaps.edi.EDIParserXML,
+            com.snaplogic.snaps.marc21.Marc21toXMLParser            
+        </snap.classes>
+        <!-- Enter your cc key prefix from keys.properties -->
+        <key.prefix>cc</key.prefix>
+        <!-- This is the username that is authorized to deploy snaps to server -->
+        <user>bkukadia@snaplogic.com</user>
+        <!-- This is the path where the snap will be deployed. In case of sidekick,
+        use the path {your_company}/{user} -->
+        <path>snaplogic/bkukadia</path>
+        <sl_build>0001</sl_build>
+        <VERSION>1</VERSION>
+    </properties>
+    <!-- Dependencies -->
+    <dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>jtest</artifactId>
+            <version>4.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.collections</groupId>
+                    <artifactId>google-collections</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- SDK dependencies -->
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>jsdk</artifactId>
+            <version>4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>jutils</artifactId>
+            <version>4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Other libraries -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-multibindings</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>2.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jruby</groupId>
+            <artifactId>jruby</artifactId>
+            <version>1.7.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.python</groupId>
+            <artifactId>jython-standalone</artifactId>
+            <version>2.7-b1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>mrjob</artifactId>
+            <version>4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.berryworks</groupId>
+            <artifactId>edireader</artifactId>
+            <version>4.7.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>sax</groupId>
+            <artifactId>sax</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.3.04</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/org.jdom/jdom2 -->
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ca.uhn.hapi</groupId>
+            <artifactId>hapi-base</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi/hapi-structures-v25 -->
+        <dependency>
+            <groupId>ca.uhn.hapi</groupId>
+            <artifactId>hapi-structures-v25</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.snaplogic</groupId>
+            <artifactId>jxml</artifactId>
+            <version>4.0</version>
+        </dependency>
+    <!--    <dependency> Spark dependency
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.10</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency> -->
+        <!-- https://mvnrepository.com/artifact/com.sun.xsom/xsom -->
+        <dependency>
+            <groupId>com.sun.xsom</groupId>
+            <artifactId>xsom</artifactId>
+            <version>20100725</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.12.4</version>
+        </dependency>
+
+
+        <dependency> <groupId>oracle</groupId><artifactId>aqapi</artifactId><version>11.2.0.1.0</version></dependency>
+
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.marc4j/marc4j -->
+<dependency>
+    <groupId>org.marc4j</groupId>
+    <artifactId>marc4j</artifactId>
+    <version>2.8.0</version>
+</dependency>
+
+
+    </dependencies>
+
+
+
+
+</project>

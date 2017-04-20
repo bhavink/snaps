@@ -1,0 +1,25 @@
+# This is how you add comments in this file
+DocGenerator {
+    allow java.security.AllPermission;
+}
+DocConsumer {
+    allow java.security.AllPermission;
+}
+PropertyTypes {
+    allow java.security.AllPermission;
+}
+SchemaExample {
+    allow java.security.AllPermission;
+}
+SingleDocGenerator {
+    allow java.security.AllPermission;
+}
+Suggest {
+    allow java.security.AllPermission;
+}
+TwoInputs {
+    allow java.security.AllPermission;
+}
+TwoInputsTwoOutputs {
+    allow java.security.AllPermission;
+}
